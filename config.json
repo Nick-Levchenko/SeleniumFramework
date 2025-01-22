@@ -1,0 +1,42 @@
+{
+  "driver_options": {
+    "timeout": 10,
+    "max_window_size": "--start-maximized"
+  },
+  "test_cases": {
+    "BasicAuthorization": {
+      "url": "http://the-internet.herokuapp.com/basic_auth",
+      "check_phrase": "Congratulations! You must have the proper credentials.",
+      "login": "admin",
+      "password": "admin"
+    },
+    "Alerts": {
+      "url": "https://the-internet.herokuapp.com/javascript_alerts",
+      "alert_text" : "I am a JS Alert",
+      "alert_result_text": "You successfully clicked an alert",
+      "confirm_text": "I am a JS Confirm",
+      "confirm_result_text": "You clicked: Ok",
+      "prompt_text": "I am a JS prompt",
+      "prompt_result_text": "You entered: "
+    },
+    "AlertsJS": {
+      "url": "https://the-internet.herokuapp.com/javascript_alerts",
+      "alert_text" : "I am a JS Alert",
+      "alert_result_text": "You successfully clicked an alert",
+      "confirm_text": "I am a JS Confirm",
+      "confirm_result_text": "You clicked: Ok",
+      "prompt_text": "I am a JS prompt",
+      "prompt_result_text": "You entered: ",
+      "alert_button_script": "document.getElementsByTagName('button')[0].click()",
+      "confirm_button_script": "document.getElementsByTagName('button')[1].click()",
+      "prompt_button_script": "document.getElementsByTagName('button')[2].click()"
+    },
+    "AlertsContextClick": {
+      "url": "https://the-internet.herokuapp.com/context_menu",
+      "alert_text": "You selected a context menu"
+    },
+    "KeyboardActions": {
+      "url": "http://the-internet.herokuapp.com/horizontal_slider"
+    }
+  }
+}
