@@ -5,6 +5,7 @@ import faker
 from pages.alerts_context_page import AlertsContextPage
 from pages.alerts_page import AlertsPage
 from pages.basic_auth_page import BasicAuthPage
+from pages.hovers_page import HoversPage
 from pages.keyboard_actions_page import KeyboardActionsPage
 from utils.alert_utils import check_to_close_alerts
 from utils.config_reader import ConfigReader
@@ -60,8 +61,8 @@ class TestAlertsJS:
     TEST_CASE_NAME = "AlertsJS"
 
     def test_alerts_js(self, driver_chrome):
-        alerts_page = AlertsPage(driver_chrome)
         driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        alerts_page = AlertsPage(driver_chrome)
         alerts_page.wait_for_opening()
         driver_chrome.driver.execute_script(config.get_param_by_test_case(self.TEST_CASE_NAME, 'alert_button_script'))
         assert alerts_page.get_alert_text() == config.get_param_by_test_case(self.TEST_CASE_NAME, 'alert_text')
@@ -88,8 +89,8 @@ class TestAlertsContextClick:
     TEST_CASE_NAME = "AlertsContextClick"
 
     def test_alerts_context_click(self, driver_chrome):
-        context_page = AlertsContextPage(driver_chrome)
         driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        context_page = AlertsContextPage(driver_chrome)
         context_page.wait_for_opening()
         context_page.context_click()
         assert context_page.get_alert_text() == config.get_param_by_test_case(self.TEST_CASE_NAME, 'alert_text')
@@ -101,8 +102,26 @@ class TestKeyboardActions:
     TEST_CASE_NAME = "KeyboardActions"
 
     def test_keyboard_actions(self, driver_chrome):
-        slider_page = KeyboardActionsPage(driver_chrome)
         driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        slider_page = KeyboardActionsPage(driver_chrome)
         slider_page.wait_for_opening()
         slider_page.move_slider()
         assert 0 < slider_page.get_result() < 5
+
+
+class TestHovers:
+    TEST_CASE_NAME = "Hovers"
+
+    def test_hovers(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        hovers_page = HoversPage(driver_chrome)
+        for user in config.get_param_by_test_case(self.TEST_CASE_NAME, 'users'):
+            hovers_page.wait_for_opening()
+            hovers_page.move_to_hover(user)
+            assert hovers_page.check_name(user).is_displayed()
+            user_number = hovers_page.get_user_number(user)
+            hovers_page.view_profile(user)
+            assert hovers_page.get_current_url().endswith(user_number)
+            driver_chrome.driver.back()
+            assert hovers_page.unique_element.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                          'unique_element_text')

@@ -37,6 +37,11 @@
     },
     "KeyboardActions": {
       "url": "http://the-internet.herokuapp.com/horizontal_slider"
+    },
+    "Hovers": {
+      "url": "https://the-internet.herokuapp.com/hovers",
+      "unique_element_text": "Hovers",
+      "users": ["user_1", "user_2", "user_3"]
     }
   }
 }
