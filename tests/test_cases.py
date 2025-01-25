@@ -5,6 +5,9 @@ import faker
 from pages.alerts_context_page import AlertsContextPage
 from pages.alerts_page import AlertsPage
 from pages.basic_auth_page import BasicAuthPage
+from pages.dynamic_content_page import DynamicContentPage
+from pages.frames_page import FramesPage
+from pages.handlers_page import HandlersPage
 from pages.hovers_page import HoversPage
 from pages.keyboard_actions_page import KeyboardActionsPage
 from utils.alert_utils import check_to_close_alerts
@@ -125,3 +128,68 @@ class TestHovers:
             driver_chrome.driver.back()
             assert hovers_page.unique_element.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
                                                                                           'unique_element_text')
+
+
+class TestHandlers:
+    TEST_CASE_NAME = "Handlers"
+
+    def test_handlers(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        handlers_page = HandlersPage(driver_chrome)
+        handlers_page.wait_for_opening()
+        handlers_page.click_new_window()
+        handlers_page.switch_to_window(1)
+        assert driver_chrome.driver.title == config.get_param_by_test_case(self.TEST_CASE_NAME, 'new_window_title')
+        assert handlers_page.window_text.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                     'new_window_text')
+        handlers_page.switch_to_window(0)
+        handlers_page.wait_for_opening()
+        handlers_page.click_new_window()
+        handlers_page.switch_to_window(2)
+        assert driver_chrome.driver.title == config.get_param_by_test_case(self.TEST_CASE_NAME, 'new_window_title')
+        assert handlers_page.window_text.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                     'new_window_text')
+        handlers_page.switch_to_window(0)
+        handlers_page.wait_for_opening()
+        handlers_page.switch_to_window(1)
+        driver_chrome.close()
+        handlers_page.switch_to_window(1)
+        driver_chrome.close()
+
+
+class TestFrames:
+    TEST_CASE_NAME = "Frames"
+
+    def test_frames(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+
+        frames_page = FramesPage(driver_chrome)
+        frames_page.click_alerts_frame_windows()
+        frames_page.click_nested_frames()
+        frames_page.switch_to_frame(config.get_param_by_test_case(self.TEST_CASE_NAME, 'nested_parent_frame'))
+        assert frames_page.nested_frames_text.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                          'nested_parent_frame_text')
+        frames_page.switch_to_frame(config.get_param_by_test_case(self.TEST_CASE_NAME, 'nested_child_frame'))
+        assert frames_page.nested_frames_text.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                          'nested_child_frame_text')
+        frames_page.switch_to_parent()
+        frames_page.switch_to_parent()
+        frames_page.click_frames()
+        frames_page.switch_to_frame(config.get_param_by_test_case(self.TEST_CASE_NAME, 'upper_frame'))
+        upper_frame_text = frames_page.frames_text.get_text()
+        frames_page.switch_to_parent()
+        frames_page.switch_to_frame(config.get_param_by_test_case(self.TEST_CASE_NAME, 'lower_frame'))
+        lower_frame_text = frames_page.frames_text.get_text()
+        assert upper_frame_text == lower_frame_text
+
+
+class TestDynamicContent:
+    TEST_CASE_NAME = "DynamicContent"
+
+    def test_dynamic_content(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        dynamic_content_page = DynamicContentPage(driver_chrome)
+        x = len(set(dynamic_content_page.get_images_links()))
+        while x != 2:
+            driver_chrome.driver.refresh()
+            x = len(set(dynamic_content_page.get_images_links()))

@@ -42,6 +42,23 @@
       "url": "https://the-internet.herokuapp.com/hovers",
       "unique_element_text": "Hovers",
       "users": ["user_1", "user_2", "user_3"]
+    },
+    "Handlers": {
+      "url": "https://the-internet.herokuapp.com/windows",
+      "new_window_text": "New Window",
+      "new_window_title": "New Window"
+    },
+    "Frames": {
+      "url": "https://demoqa.com/frames",
+      "nested_parent_frame": "frame1",
+      "nested_child_frame": 0,
+      "nested_parent_frame_text": "Parent frame",
+      "nested_child_frame_text": "Child Iframe",
+      "upper_frame": "frame1",
+      "lower_frame": "frame2"
+    },
+    "DynamicContent": {
+      "url": "https://the-internet.herokuapp.com/dynamic_content"
     }
   }
 }
