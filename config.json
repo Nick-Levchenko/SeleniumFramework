@@ -1,0 +1,70 @@
+{
+  "driver_options": {
+    "timeout": 10,
+    "max_window_size": "--start-maximized"
+  },
+  "autoit_script": "utils\\send_path.exe",
+  "test_cases": {
+    "BasicAuthorization": {
+      "url": "http://the-internet.herokuapp.com/basic_auth",
+      "check_phrase": "Congratulations! You must have the proper credentials.",
+      "login": "admin",
+      "password": "admin"
+    },
+    "Alerts": {
+      "url": "https://the-internet.herokuapp.com/javascript_alerts",
+      "alert_text": "I am a JS Alert",
+      "alert_result_text": "You successfully clicked an alert",
+      "confirm_text": "I am a JS Confirm",
+      "confirm_result_text": "You clicked: Ok",
+      "prompt_text": "I am a JS prompt",
+      "prompt_result_text": "You entered: ",
+      "alert_button_script": "document.getElementsByTagName('button')[0].click()",
+      "confirm_button_script": "document.getElementsByTagName('button')[1].click()",
+      "prompt_button_script": "document.getElementsByTagName('button')[2].click()"
+    },
+    "AlertsContextClick": {
+      "url": "https://the-internet.herokuapp.com/context_menu",
+      "alert_text": "You selected a context menu"
+    },
+    "KeyboardActions": {
+      "url": "http://the-internet.herokuapp.com/horizontal_slider"
+    },
+    "Hovers": {
+      "url": "https://the-internet.herokuapp.com/hovers",
+      "unique_element_text": "Hovers",
+      "users": [
+        "user_1",
+        "user_2",
+        "user_3"
+      ]
+    },
+    "Handlers": {
+      "url": "https://the-internet.herokuapp.com/windows",
+      "new_window_text": "New Window",
+      "new_window_title": "New Window"
+    },
+    "Frames": {
+      "url": "https://demoqa.com/frames",
+      "nested_parent_frame": "frame1",
+      "nested_child_frame": 0,
+      "nested_parent_frame_text": "Parent frame",
+      "nested_child_frame_text": "Child Iframe",
+      "upper_frame": "frame1",
+      "lower_frame": "frame2"
+    },
+    "DynamicContent": {
+      "url": "https://the-internet.herokuapp.com/dynamic_content"
+    },
+    "InfinityScroll": {
+      "url": "https://the-internet.herokuapp.com/infinite_scroll"
+    },
+    "UploadImage": {
+      "url": "https://the-internet.herokuapp.com/upload",
+      "file": "D:/QA/Selenium/schema.jpg",
+      "file_title": "schema.jpg",
+      "success_upload": "File Uploaded!",
+      "check_mark": "✔"
+    }
+  }
+}
