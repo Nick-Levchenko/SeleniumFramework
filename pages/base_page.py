@@ -10,7 +10,7 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.logger = Logger.getLogger(__name__)
+        self.logger = Logger.getlogger()
         self.page_name = None
         self.unique_element = None
         self.config = ConfigReader()

@@ -9,7 +9,9 @@ from pages.dynamic_content_page import DynamicContentPage
 from pages.frames_page import FramesPage
 from pages.handlers_page import HandlersPage
 from pages.hovers_page import HoversPage
+from pages.infinity_scroll_page import InfinityScrollPage
 from pages.keyboard_actions_page import KeyboardActionsPage
+from pages.upload_image_page import UploadImagePage
 from utils.alert_utils import check_to_close_alerts
 from utils.config_reader import ConfigReader
 
@@ -58,10 +60,6 @@ class TestAlerts:
         driver_chrome.alert.accept()
         check_to_close_alerts(driver_chrome)
         assert alerts_page.result_section.get_text() == f"{config.get_param_by_test_case(self.TEST_CASE_NAME, 'prompt_result_text')}{fake_text}"
-
-
-class TestAlertsJS:
-    TEST_CASE_NAME = "AlertsJS"
 
     def test_alerts_js(self, driver_chrome):
         driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
@@ -193,3 +191,45 @@ class TestDynamicContent:
         while x != 2:
             driver_chrome.driver.refresh()
             x = len(set(dynamic_content_page.get_images_links()))
+
+
+class TestInfinityScroll:
+    TEST_CASE_NAME = "InfinityScroll"
+
+    def test_infinity_scroll(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        infinity_scroll_page = InfinityScrollPage(driver_chrome)
+        infinity_scroll_page.wait_for_opening()
+        infinity_scroll_page.scroll_by_age(34)
+        assert infinity_scroll_page.get_count_paragraph() == 34
+
+
+class TestUploadImage:
+    TEST_CASE_NAME = "UploadImage"
+
+    def test_upload_file(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        upload_image_page = UploadImagePage(driver_chrome)
+        upload_image_page.wait_for_opening()
+        upload_image_page.upload_file()
+        assert upload_image_page.success_upload_text.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                                 'success_upload')
+        assert upload_image_page.upload_file_title.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                               'file_title')
+
+    def test_upload_file_dialog_window(self, driver_chrome):
+        driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
+        upload_image_page = UploadImagePage(driver_chrome)
+        upload_image_page.wait_for_opening()
+        upload_image_page.upload_file_dialog_window()
+
+        assert upload_image_page.file_name_in_area.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
+                                                                                               'file_title')
+        mark = upload_image_page.check_mark.get_text()
+        assert mark == "✔"
+        '''вот тут странная ошибка возникла
+        ошибка логера, в base_element в методе get_text логгер сначала пишет
+        что используется этот метод, а потом пишет какой текст получил.
+        И вот именно в этой строке ошибка кодировки как я понял. Без указания utf-8
+        постоянно эта ошибка выскакивает. Хотя кое-где читал что это мол из-за винды, на линуксе и 
+        макоси такого вроде нет. Хз, победить смог только так'''

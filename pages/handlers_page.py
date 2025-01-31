@@ -19,13 +19,10 @@ class HandlersPage(BasePage):
         self.window_text = TextElement(self.driver, self.NEW_WINDOW_TEXT)
 
     def click_new_window(self):
-        self.logger.info(f'Click new window button')
         self.button.click()
 
     def switch_to_window(self, window_number):
-        self.logger.info(f'Switch window number {window_number}')
         self.driver.switch_to_window(window_number)
 
     def get_all_windows(self):
-        self.logger.info(f'Get all windows')
         return self.driver.driver.window_handles

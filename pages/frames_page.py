@@ -31,17 +31,13 @@ class FramesPage(BasePage):
         self.alerts_frame_windows.click()
 
     def click_nested_frames(self):
-        self.logger.info('Clicking Nested Frames')
         self.nested_frames.click()
 
     def click_frames(self):
-        self.logger.info('Clicking Frames')
         self.frames.click()
 
     def switch_to_frame(self, frame):
-        self.logger.info('Switching to Nested Frames')
         self.driver.switch_to_frame(frame)
 
     def switch_to_parent(self):
-        self.logger.info('Switching to parent frame')
         self.driver.switch_to_previous_frame()

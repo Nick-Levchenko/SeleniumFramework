@@ -3,6 +3,7 @@
     "timeout": 10,
     "max_window_size": "--start-maximized"
   },
+  "autoit_script": "utils\\send_path.exe",
   "test_cases": {
     "BasicAuthorization": {
       "url": "http://the-internet.herokuapp.com/basic_auth",
@@ -12,16 +13,7 @@
     },
     "Alerts": {
       "url": "https://the-internet.herokuapp.com/javascript_alerts",
-      "alert_text" : "I am a JS Alert",
-      "alert_result_text": "You successfully clicked an alert",
-      "confirm_text": "I am a JS Confirm",
-      "confirm_result_text": "You clicked: Ok",
-      "prompt_text": "I am a JS prompt",
-      "prompt_result_text": "You entered: "
-    },
-    "AlertsJS": {
-      "url": "https://the-internet.herokuapp.com/javascript_alerts",
-      "alert_text" : "I am a JS Alert",
+      "alert_text": "I am a JS Alert",
       "alert_result_text": "You successfully clicked an alert",
       "confirm_text": "I am a JS Confirm",
       "confirm_result_text": "You clicked: Ok",
@@ -41,7 +33,11 @@
     "Hovers": {
       "url": "https://the-internet.herokuapp.com/hovers",
       "unique_element_text": "Hovers",
-      "users": ["user_1", "user_2", "user_3"]
+      "users": [
+        "user_1",
+        "user_2",
+        "user_3"
+      ]
     },
     "Handlers": {
       "url": "https://the-internet.herokuapp.com/windows",
@@ -59,6 +55,16 @@
     },
     "DynamicContent": {
       "url": "https://the-internet.herokuapp.com/dynamic_content"
+    },
+    "InfinityScroll": {
+      "url": "https://the-internet.herokuapp.com/infinite_scroll"
+    },
+    "UploadImage": {
+      "url": "https://the-internet.herokuapp.com/upload",
+      "file": "D:/QA/Selenium/schema.jpg",
+      "file_title": "schema.jpg",
+      "success_upload": "File Uploaded!",
+      "check_mark": "✔"
     }
   }
 }

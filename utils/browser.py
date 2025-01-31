@@ -10,7 +10,7 @@ class Browser:
         self.name = "Browser"
         self.driver = webdriver.Chrome()
         self.alert = Alert(self.driver)
-        self.logger = Logger().getLogger()
+        self.logger = Logger().getlogger()
 
     def get(self, url):
         self.logger.info(f"{self.name} get: {url}")

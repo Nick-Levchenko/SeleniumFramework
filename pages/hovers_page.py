@@ -34,25 +34,19 @@ class HoversPage(BasePage):
 
     def get_user_param(self, user_name, user_element):
         user = self.USERS[user_name]
-        self.logger.info(f'get_user_param: {user_element} on {self.page_name}')
         return self.wait.until(EC.visibility_of_element_located(user[user_element]))
 
     def move_to_hover(self, username):
-        self.logger.info(f'move_to_hover: {username} on {self.page_name}')
         self.action.move_to_element(self.get_user_param(username, 'user_avatar')).perform()
 
     def check_name(self, username):
-        self.logger.info(f'check_name: {username} on {self.page_name}')
         return self.get_user_param(username, 'username')
 
     def view_profile(self, username):
-        self.logger.info(f'view_profile: {username}')
         self.action.click(self.get_user_param(username, 'user_link')).perform()
 
     def get_current_url(self):
-        self.logger.info(f'get_current_url: {self.driver.current_url()}')
         return self.driver.current_url()
 
     def get_user_number(self, username):
-        self.logger.info(f'get_user_number: {username}')
         return self.get_user_param(username, 'username').text[-1:]

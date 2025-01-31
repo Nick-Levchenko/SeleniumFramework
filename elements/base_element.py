@@ -1,7 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from tests.conftest import Browser
+from conftest import Browser
 from utils.config_reader import ConfigReader
 from utils.logger import Logger
 
@@ -12,7 +12,7 @@ class BaseElement:
         self.config: ConfigReader = ConfigReader()
         self.wait: WebDriverWait = WebDriverWait(self.driver.driver, self.config.read_driver_config('timeout'))
         self.locator: tuple[str, str] = locator
-        self.logger = Logger().getLogger()
+        self.logger = Logger().getlogger()
 
     def click(self):
         self.logger.info(f"{__name__} use click")
@@ -21,7 +21,7 @@ class BaseElement:
     def get_text(self):
         self.logger.info(f"{__name__} use get_text")
         text = self.wait.until(EC.visibility_of_element_located(self.locator)).text
-        self.logger.info(f"{__name__} get_text received the text '{text}'")
+        self.logger.info(f"{__name__} get_text received the text '{text.encode('utf-8')}'")
         return text
 
     def get_attribute(self, attribute_name):
@@ -39,3 +39,8 @@ class BaseElement:
     def wait_for_presence(self):
         self.logger.info(f"{__name__} use wait_for_presence")
         self.wait.until(EC.presence_of_element_located(self.locator))
+
+    def get_count_elements(self):
+        self.logger.info(f"{__name__} use get_count_elements")
+        elements = self.wait.until(EC.presence_of_all_elements_located(self.locator))
+        return len(elements)

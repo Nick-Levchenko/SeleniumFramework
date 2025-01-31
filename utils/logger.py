@@ -3,7 +3,8 @@ import logging
 
 class Logger:
 
-    def getLogger(self):
+    @staticmethod
+    def getlogger():
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
 

@@ -1,8 +1,8 @@
 from selenium.webdriver.support.wait import WebDriverWait
 
+from conftest import Browser
 from elements.text_element import TextElement
 from pages.base_page import BasePage
-from tests.conftest import Browser
 from utils.config_reader import ConfigReader
 
 
@@ -20,8 +20,8 @@ class BasicAuthPage(BasePage):
         self.unique_element = TextElement(self.driver, self.UNIQUE_ELEMENT_LOC)
         self.success_element = TextElement(self.driver, self.SUCCESS_AUTH_TEXT)
 
-    def give_format_url(self, url: str, login, password):
-        self.logger.info(f'give_format_url take url = {url}')
+    @staticmethod
+    def give_format_url(url: str, login, password):
         auth_string = f'{login}:{password}@'
         if url.startswith('https://'):
             index = 8
@@ -33,4 +33,4 @@ class BasicAuthPage(BasePage):
             return final_url
         formatted_url = auth_string + url
 
-        return formatted_url, self.logger.info(f'give_format_url return formatted url = {formatted_url}')
+        return formatted_url
