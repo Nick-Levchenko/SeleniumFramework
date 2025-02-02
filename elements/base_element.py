@@ -21,7 +21,6 @@ class BaseElement:
     def get_text(self):
         self.logger.info(f"{__name__} use get_text")
         text = self.wait.until(EC.visibility_of_element_located(self.locator)).text
-        self.logger.info(f"{__name__} get_text received the text '{text.encode('utf-8')}'")
         return text
 
     def get_attribute(self, attribute_name):

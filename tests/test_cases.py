@@ -1,5 +1,3 @@
-import time
-
 import faker
 
 from pages.alerts_context_page import AlertsContextPage
@@ -31,7 +29,6 @@ class TestBasicAuthPage:
         auth_page.unique_element.wait_for_presence()
         assert auth_page.success_element.get_text() == config.get_param_by_test_case(self.TEST_CASE_NAME,
                                                                                      'check_phrase')
-        time.sleep(3)
 
 
 class TestAlerts:
@@ -187,10 +184,8 @@ class TestDynamicContent:
     def test_dynamic_content(self, driver_chrome):
         driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
         dynamic_content_page = DynamicContentPage(driver_chrome)
-        x = len(set(dynamic_content_page.get_images_links()))
-        while x != 2:
-            driver_chrome.driver.refresh()
-            x = len(set(dynamic_content_page.get_images_links()))
+        dynamic_content_page.get_two_identical_avatars()
+        assert dynamic_content_page.compare_avatars() == 2
 
 
 class TestInfinityScroll:
@@ -227,9 +222,3 @@ class TestUploadImage:
                                                                                                'file_title')
         mark = upload_image_page.check_mark.get_text()
         assert mark == "✔"
-        '''вот тут странная ошибка возникла
-        ошибка логера, в base_element в методе get_text логгер сначала пишет
-        что используется этот метод, а потом пишет какой текст получил.
-        И вот именно в этой строке ошибка кодировки как я понял. Без указания utf-8
-        постоянно эта ошибка выскакивает. Хотя кое-где читал что это мол из-за винды, на линуксе и 
-        макоси такого вроде нет. Хз, победить смог только так'''

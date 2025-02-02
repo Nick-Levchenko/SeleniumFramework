@@ -12,6 +12,9 @@ class Browser:
         self.alert = Alert(self.driver)
         self.logger = Logger().getlogger()
 
+    def maximize_window(self):
+        self.driver.maximize_window()
+
     def get(self, url):
         self.logger.info(f"{self.name} get: {url}")
         self.driver.get(url)

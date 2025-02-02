@@ -7,7 +7,7 @@ from utils.browser import Browser
 
 
 class FramesPage(BasePage):
-    UNIQUE_ELEMENT_LOC = (By.XPATH, "(//*[@id='app']//img)[1]")
+    UNIQUE_ELEMENT_LOC = (By.ID, 'sampleHeading')
     ALERTS_FRAME_WINDOWS = (By.XPATH, "//*[contains(@class, 'element-group')][3]")
 
     NESTED_FRAMES = (By.XPATH, "(//*[@id='item-3'])[2]")

@@ -2,14 +2,13 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
+from conftest import Browser
 from elements.text_element import TextElement
 from pages.base_page import BasePage
-from conftest import Browser
-from utils.logger import Logger
 
 
 class AlertsContextPage(BasePage):
-    UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@id='content']//h3")
+    UNIQUE_ELEMENT_LOC = (By.ID, "hot-spot")
     SELECTED_AREA = (By.ID, "hot-spot")
 
     def __init__(self, driver):

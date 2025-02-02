@@ -7,11 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from elements.text_element import TextElement
 from pages.base_page import BasePage
 from utils.browser import Browser
-from utils.logger import Logger
 
 
 class KeyboardActionsPage(BasePage):
-    UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@id='content']//h3")
+    UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@id='content']//input")
     SLIDER = (By.XPATH, "//*[@id='content']//input")
     RANGE_VALUE = (By.ID, "range")
 

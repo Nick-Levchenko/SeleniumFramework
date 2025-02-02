@@ -8,7 +8,7 @@ from utils.browser import Browser
 
 
 class DynamicContentPage(BasePage):
-    UNIQUE_ELEMENT_LOC = (By.ID, 'content')
+    UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@id='content']//img")
     IMAGES = (By.XPATH, "//*[@id='content']//img")
 
     def __init__(self, driver):
@@ -24,3 +24,13 @@ class DynamicContentPage(BasePage):
         for image in images:
             links_list.append(image.get_attribute('src'))
         return links_list
+
+    def compare_avatars(self):
+        return len(set(self.get_images_links()))
+
+    def get_two_identical_avatars(self):
+        avatars = self.compare_avatars()
+        while avatars != 2:
+            self.driver.driver.refresh()
+            avatars = self.compare_avatars()
+        return avatars

@@ -1,14 +1,13 @@
 from selenium.webdriver.common.by import By
 
+from conftest import Browser
 from elements.button_element import ButtonElement
 from elements.text_element import TextElement
 from pages.base_page import BasePage
-from conftest import Browser
-from utils.logger import Logger
 
 
 class AlertsPage(BasePage):
-    UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@id='content']//h3")
+    UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@onclick='jsAlert()']")
     ALERT_BUTTON = (By.XPATH, "//*[@onclick='jsAlert()']")
     CONFIRM_BUTTON = (By.XPATH, "//*[@onclick='jsConfirm()']")
     PROMPT_BUTTON = (By.XPATH, "//*[@onclick='jsPrompt()']")

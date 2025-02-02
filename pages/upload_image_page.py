@@ -14,7 +14,7 @@ class UploadImagePage(BasePage):
     UNIQUE_ELEMENT_LOC = (By.ID, 'file-submit')
     CHOOSE_FILE_LOC = (By.ID, 'file-upload')
     UPLOAD_BUTTON_LOC = (By.ID, 'file-submit')
-    UPDATED_PAGE_UNIQUE_ELEMENT_LOC = (By.ID, 'uploaded-files')
+    UPDATED_PAGE_UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[text()='File Uploaded!']")
     SUCCESS_UPLOAD_TEXT_LOC = (By.XPATH, "//*[@id='content']//h3")
     UPLOAD_FILE_TITLE_LOC = (By.ID, "uploaded-files")
     UPLOAD_AREA_LOC = (By.ID, "drag-drop-upload")
@@ -43,5 +43,3 @@ class UploadImagePage(BasePage):
         self.upload_area.click()
         time.sleep(1)
         os.popen(r'D:\PycharmProjects\SeleniumFramework\utils\send_path.exe')
-        '''в этом месте тоже не получается сделать ожидание кроме как time.sleep.
-        асинхронность как я понял селениуму не доступна. Как быть в таких ситуациях?'''

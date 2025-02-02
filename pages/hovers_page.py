@@ -22,7 +22,7 @@ class HoversPage(BasePage):
 
     USERS = {'user_1': {'username': USER_1_NAME, 'user_avatar': USER_1_IMG, 'user_link': USER_1_LINK},
              'user_2': {'username': USER_2_NAME, 'user_avatar': USER_2_IMG, 'user_link': USER_2_LINK},
-             'user_3': {'username': USER_3_NAME, 'user_avatar': USER_3_IMG, 'user_link': USER_3_LINK},}
+             'user_3': {'username': USER_3_NAME, 'user_avatar': USER_3_IMG, 'user_link': USER_3_LINK}, }
 
     def __init__(self, driver):
         super().__init__(driver)

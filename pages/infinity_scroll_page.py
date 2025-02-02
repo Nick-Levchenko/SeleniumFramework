@@ -9,7 +9,9 @@ from utils.browser import Browser
 
 class InfinityScrollPage(BasePage):
     UNIQUE_ELEMENT_LOC = (By.XPATH, "//*[@id='content']//h3")
-    PARAGRAPH_LOC = (By.XPATH, "//*[@class='jscroll-added']")
+    PARAGRAPH_LOC = (
+    By.XPATH, "//*[@class='jscroll-added']")  # тут либо вложенность очень большая, либо через класс. То и то плохо
+    # в реальности наверное можно фронтендера попросить сделать id\name?
     FOOTER = (By.ID, "page-footer")
 
     def __init__(self, driver):
