@@ -1,11 +1,8 @@
-import os
-import time
-
 from selenium.webdriver.common.by import By
 
 from elements.button_element import ButtonElement
 from elements.input_element import InputElement
-from elements.text_element import TextElement
+from elements.text_element import LabelElement
 from pages.base_page import BasePage
 from utils.browser import Browser
 
@@ -25,21 +22,16 @@ class UploadImagePage(BasePage):
         super().__init__(driver)
         self.driver: Browser = driver
         self.page_name = 'UploadImage'
-        self.unique_element = ButtonElement(self.driver, self.UNIQUE_ELEMENT_LOC)
-        self.choose_file = InputElement(self.driver, self.CHOOSE_FILE_LOC)
-        self.upload_button = ButtonElement(self.driver, self.UPLOAD_BUTTON_LOC)
-        self.success_upload_text = TextElement(self.driver, self.SUCCESS_UPLOAD_TEXT_LOC)
-        self.upload_file_title = TextElement(self.driver, self.UPLOAD_FILE_TITLE_LOC)
-        self.upload_area = ButtonElement(self.driver, self.UPLOAD_AREA_LOC)
-        self.file_name_in_area = TextElement(self.driver, self.FILENAME_IN_AREA_LOC)
-        self.check_mark = TextElement(self.driver, self.CHECK_MARK_LOC)
+        self.unique_element = ButtonElement(self.driver, self.UNIQUE_ELEMENT_LOC, self.page_name)
+        self.choose_file = InputElement(self.driver, self.CHOOSE_FILE_LOC, self.page_name)
+        self.upload_button = ButtonElement(self.driver, self.UPLOAD_BUTTON_LOC, self.page_name)
+        self.success_upload_text = LabelElement(self.driver, self.SUCCESS_UPLOAD_TEXT_LOC, self.page_name)
+        self.upload_file_title = LabelElement(self.driver, self.UPLOAD_FILE_TITLE_LOC, self.page_name)
+        self.upload_area = ButtonElement(self.driver, self.UPLOAD_AREA_LOC, self.page_name)
+        self.file_name_in_area = LabelElement(self.driver, self.FILENAME_IN_AREA_LOC, self.page_name)
+        self.check_mark = LabelElement(self.driver, self.CHECK_MARK_LOC, self.page_name)
 
     def upload_file(self):
-        file = self.config.get_param_by_test_case(self.page_name, 'file')
+        file = self.CONFIG.get_param_by_test_case(self.page_name, 'file')
         self.choose_file.send_keys(file)
         self.upload_button.click()
-
-    def upload_file_dialog_window(self):
-        self.upload_area.click()
-        time.sleep(1)
-        os.popen(r'D:\PycharmProjects\SeleniumFramework\utils\send_path.exe')

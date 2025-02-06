@@ -1,9 +1,8 @@
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
 from conftest import Browser
-from elements.text_element import TextElement
+from elements.button_element import ButtonElement
+from elements.text_element import LabelElement
 from pages.base_page import BasePage
 
 
@@ -15,9 +14,5 @@ class AlertsContextPage(BasePage):
         super().__init__(driver)
         self.driver: Browser = driver
         self.page_name = 'AlertsContextClickPage'
-        self.unique_element = TextElement(self.driver, self.UNIQUE_ELEMENT_LOC)
-        self.actions = ActionChains(self.driver.driver)
-
-    def context_click(self):
-        target = self.wait.until(EC.element_to_be_clickable(self.SELECTED_AREA))
-        self.actions.context_click(target).perform()
+        self.unique_element = LabelElement(self.driver, self.UNIQUE_ELEMENT_LOC, self.page_name)
+        self.area = ButtonElement(self.driver, self.SELECTED_AREA, self.page_name)

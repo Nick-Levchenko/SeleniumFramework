@@ -1,10 +1,10 @@
-from random import randrange
+import random
 
-from selenium.webdriver import ActionChains
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
-from elements.text_element import TextElement
+from elements.input_element import InputElement
+from elements.text_element import LabelElement
 from pages.base_page import BasePage
 from utils.browser import Browser
 
@@ -18,15 +18,18 @@ class KeyboardActionsPage(BasePage):
         super().__init__(driver)
         self.driver: Browser = driver
         self.page_name = 'KeyboardActions'
-        self.unique_element = TextElement(self.driver, self.UNIQUE_ELEMENT_LOC)
-        self.range_value = TextElement(self.driver, self.RANGE_VALUE)
-        self.action = ActionChains(self.driver.driver)
-        self.random = randrange(-50, 50, 10)
+        self.unique_element = LabelElement(self.driver, self.UNIQUE_ELEMENT_LOC, self.page_name)
+        self.range_value = LabelElement(self.driver, self.RANGE_VALUE, self.page_name)
+        self.slider = InputElement(self.driver, self.SLIDER, self.page_name)
+        self.slider_max_value = self.slider.get_attribute('max')
+        self.slider_step = self.slider.get_attribute('step')
 
     def move_slider(self):
-        slider = self.wait.until(EC.element_to_be_clickable(self.SLIDER))
-        self.action.click_and_hold(slider).move_by_offset(self.random, 0).release().perform()
-
-    def get_result(self):
-        result = float(self.range_value.get_text())
-        return result
+        max_step = int(float(self.slider_max_value) / float(self.slider_step))
+        random_list = [i for i in range(max_step) if i != 0]
+        random_choice = random.choice(random_list)
+        for i in range(random_choice):
+            self.slider.send_keys(Keys.ARROW_RIGHT)
+        return random_choice / 2
+    # а вот можно так делать? что помимо самого движения еще и возвращаем
+    # значение на сколько сдвинули?

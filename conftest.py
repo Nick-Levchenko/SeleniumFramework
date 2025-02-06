@@ -2,21 +2,15 @@ import pytest
 from selenium.webdriver.chrome.options import Options
 
 from utils.browser import Browser
-from utils.browser_factory import BrowserFactory
+from utils.config_reader import ConfigReader
+
+config = ConfigReader()
 
 
 @pytest.fixture
 def driver_chrome():
     options = Options()
-    browser = BrowserFactory.get_browser()
-    browser.maximize_window()
-    yield browser
-    browser.quit()
-
-
-@pytest.fixture
-def basic_auth_driver():
-    browser = BrowserFactory.get_browser()
-    browser.maximize_window()
+    options.add_argument(config.read_driver_config('max_window_size'))
+    browser = Browser(options=options)
     yield browser
     browser.quit()
