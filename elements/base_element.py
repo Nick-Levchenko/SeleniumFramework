@@ -47,9 +47,8 @@ class BaseElement:
 
     def get_text(self):
         self.LOGGER.info(f"{self.title} use get_text")
-        self.wait_for_presence()
-        return self.wait.until(EC.presence_of_element_located(self.locator)).text
+        return self.wait_for_presence().text
 
     def get_attribute(self, attribute_name):
         self.LOGGER.info(f"{self.title} use get_attribute get attribute {attribute_name}")
-        return self.wait.until(EC.presence_of_element_located(self.locator)).get_attribute(attribute_name)
+        return self.wait_for_presence().get_attribute(attribute_name)

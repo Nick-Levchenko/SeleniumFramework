@@ -1,5 +1,5 @@
 from pages.basic_auth_page import BasicAuthPage
-from utils.page_utils import give_format_url
+from utils.url_utils import give_format_url
 
 
 class TestBasicAuthPage:

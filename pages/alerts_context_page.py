@@ -16,3 +16,6 @@ class AlertsContextPage(BasePage):
         self.page_name = 'AlertsContextClickPage'
         self.unique_element = LabelElement(self.driver, self.UNIQUE_ELEMENT_LOC, self.page_name)
         self.area = ButtonElement(self.driver, self.SELECTED_AREA, self.page_name)
+
+    def click_on_area(self):
+        self.driver.action.context_click(self.area.wait_for_clickable()).perform()

@@ -1,6 +1,5 @@
 from pages.hovers_page import HoversPage
 from utils.config_reader import ConfigReader
-from utils.page_utils import get_locator_by_index
 
 config = ConfigReader()
 
@@ -23,7 +22,7 @@ class TestHovers:
             hovers_page.move_to_hover(user)
             assert hovers_page.check_name(user).is_displayed(), f'username is not displayed - {user}'
             user_number = hovers_page.get_user_number(user)
-            current_loc = get_locator_by_index(driver_chrome, int(user), 'user_link')
+            current_loc = hovers_page.get_current_url(int(user))
             driver_chrome.action.click(current_loc).perform()
             assert driver_chrome.get_current_url().endswith(
                 user_number), f"current url doesn't match the user's number - {user_number}"

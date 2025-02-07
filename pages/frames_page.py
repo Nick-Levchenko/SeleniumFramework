@@ -13,7 +13,7 @@ class FramesPage(BasePage):
     NESTED_FRAMES = (By.XPATH, "(//*[@id='item-3'])[2]")
     NESTED_FRAMES_TEXT = (By.XPATH, '//body')
     PARENT_FRAME_LOC = (By.ID, 'frame1')
-    CHILD_FRAME_LOC = (By.XPATH, "//*[@srcdoc='<p>Child Iframe</p>']")
+    CHILD_FRAME_LOC = (By.XPATH, "//*[contains(@srcdoc, 'Child Iframe')]")
 
     FRAMES = (By.XPATH, "(//*[@id='item-2'])[2]")
     FRAMES_TEXT = (By.ID, 'sampleHeading')

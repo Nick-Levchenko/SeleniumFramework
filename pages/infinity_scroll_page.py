@@ -1,10 +1,10 @@
+from bs4 import BeautifulSoup
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from elements.text_element import LabelElement
 from pages.base_page import BasePage
 from utils.browser import Browser
-from utils.page_utils import get_count_elements
 
 
 class InfinityScrollPage(BasePage):
@@ -21,4 +21,6 @@ class InfinityScrollPage(BasePage):
         self.action = ActionChains(self.driver.driver)
 
     def get_count_paragraph(self):
-        return get_count_elements(self.driver, 'div', 'class', 'jscroll-added')
+        soup = BeautifulSoup(self.driver.driver.page_source, 'lxml')
+        count = len(soup.find_all('div', attrs={'class': 'jscroll-added'}))
+        return count

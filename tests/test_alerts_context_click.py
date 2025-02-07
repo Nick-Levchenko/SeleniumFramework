@@ -12,7 +12,7 @@ class TestAlertsContextClick:
         driver_chrome.get(config.get_url_by_test_case(self.TEST_CASE_NAME))
         context_page = AlertsContextPage(driver_chrome)
         context_page.wait_for_opening()
-        driver_chrome.action.context_click(context_page.area.wait_for_clickable()).perform()
+        context_page.click_on_area()
         alert_text = driver_chrome.get_alert_text()
         assert alert_text == self.ALERT_TEXT, f'actual - {alert_text}, expected - {self.ALERT_TEXT}'
         driver_chrome.alert.accept()

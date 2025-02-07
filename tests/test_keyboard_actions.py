@@ -12,4 +12,4 @@ class TestKeyboardActions:
         slider_page = KeyboardActionsPage(driver_chrome)
         slider_page.wait_for_opening()
         result_value = slider_page.move_slider()
-        assert 0.5 <= result_value <= 4.5, f'result_value should be between 0.5 and 4.5, actual value is {result_value}'
+        assert slider_page.get_min_allowed_value() <= result_value <= slider_page.get_max_allowed_value(), f'result_value should be between 0.5 and 4.5, actual value is {result_value}'

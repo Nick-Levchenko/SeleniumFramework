@@ -35,3 +35,18 @@ class UploadImagePage(BasePage):
         file = self.CONFIG.get_param_by_test_case(self.page_name, 'file')
         self.choose_file.send_keys(file)
         self.upload_button.click()
+
+    def get_success_upload_text(self):
+        return self.success_upload_text.get_text()
+
+    def get_upload_file_title(self):
+        return self.upload_file_title.get_text()
+
+    def click_upload_button(self):
+        self.upload_area.click()
+
+    def get_file_name_in_area(self):
+        return self.file_name_in_area.get_text()
+
+    def get_check_mark(self):
+        return self.check_mark.get_text()

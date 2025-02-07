@@ -12,7 +12,6 @@ class BasePage:
         self.driver: Browser = driver
         self.page_name = None
         self.unique_element = None
-        self.wait = WebDriverWait(self.driver.driver, self.CONFIG.read_driver_config('timeout'))
 
     def wait_for_opening(self):
         self.unique_element.wait_for_presence()

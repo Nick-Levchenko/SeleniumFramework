@@ -1,10 +1,10 @@
+from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 
 from elements.button_element import ButtonElement
 from elements.image_element import ImageElement
 from pages.base_page import BasePage
 from utils.browser import Browser
-from utils.page_utils import img_parser
 
 
 class DynamicContentPage(BasePage):
@@ -19,4 +19,8 @@ class DynamicContentPage(BasePage):
         self.images = ImageElement(self.driver, self.IMAGES, self.page_name)
 
     def get_images_links(self):
-        return img_parser(self.driver)
+        soup = BeautifulSoup(self.driver.driver.page_source, 'lxml')
+        while len(set(soup.select('img')[1:])) != 2:
+            self.driver.driver.refresh()
+            soup = BeautifulSoup(self.driver.driver.page_source, 'lxml')
+        return len(set(soup.select('img')[1:]))
