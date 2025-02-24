@@ -10,7 +10,8 @@ config = ConfigReader()
 @pytest.fixture
 def driver_chrome():
     options = Options()
-    options.add_argument(config.read_driver_config('max_window_size'))
+    options.add_argument('--headless')
+    options.add_argument('no-sandbox')
     browser = Browser(options=options)
     yield browser
     browser.quit()
