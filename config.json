@@ -1,0 +1,40 @@
+{
+  "driver_options": {
+    "timeout": 10,
+    "max_window_size": "--start-maximized"
+  },
+  "autoit_script": "utils\\send_path.exe",
+  "test_cases": {
+    "BasicAuthorization": {
+      "url": "http://the-internet.herokuapp.com/basic_auth"
+    },
+    "Alerts": {
+      "url": "https://the-internet.herokuapp.com/javascript_alerts"
+    },
+    "AlertsContextClick": {
+      "url": "https://the-internet.herokuapp.com/context_menu"
+    },
+    "KeyboardActions": {
+      "url": "http://the-internet.herokuapp.com/horizontal_slider"
+    },
+    "Hovers": {
+      "url": "https://the-internet.herokuapp.com/hovers"
+    },
+    "Handlers": {
+      "url": "https://the-internet.herokuapp.com/windows"
+    },
+    "Frames": {
+      "url": "https://demoqa.com/frames"
+    },
+    "DynamicContent": {
+      "url": "https://the-internet.herokuapp.com/dynamic_content"
+    },
+    "InfinityScroll": {
+      "url": "https://the-internet.herokuapp.com/infinite_scroll"
+    },
+    "UploadImage": {
+      "url": "https://the-internet.herokuapp.com/upload",
+      "file": "D:/QA/Selenium/schema.jpg"
+    }
+  }
+}
