@@ -15,4 +15,4 @@ class TestInfinityScroll:
         while infinity_scroll_page.get_count_paragraph() < self.AGE:
             driver_chrome.scroll_down()
         total_paragraphs = infinity_scroll_page.get_count_paragraph()
-        assert total_paragraphs == 34, f'total_paragraphs - {total_paragraphs}, expected 34'
+        assert total_paragraphs == self.AGE, f'total_paragraphs - {total_paragraphs}, expected 34'
